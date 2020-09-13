@@ -1,5 +1,5 @@
 //creating table in java
-function tableSetup() {
+function tables() {
     const table = $(`
 <input id="fnm" placeholder="First Name" .>
 <input id="lnm" placeholder="Last Name" .>
@@ -51,16 +51,37 @@ function tableSetup() {
     //appending table to DOM and synching button "addinfor2table" to DOM
     $('body').append(table);
     $('#addInfo2Table').on('click', employeeAdded);
-}    
-    // running event to add submited fields to DOM
-   function employeeAdded(event) {
-    console.log('employee added', event.target);
-    const firstName = $('fnm').val()
-    const lastName = $('lnm').val()
-    const id = $('iD').val()
-    const title = $('title').val()
-    const annualSalary = $('annSal').val()
-   }
+}
+// running event to add submitted fields to DOM
+function employeeAdded(event) {
+    const firstName = $('#fnm').val();
+    const lastName = $('#lnm').val();
+    const iD = $('#iD').val();
+    const title = $('#title').val();
+    const annualSalary = $('#annSal').val();
+    console.log(firstName, lastName, "employee added");
 
+    // making a string
+    const emplElement = $(`
+    <tr> 
+        <td>${firstName}</td>
+        <td>${lastName}</td>
+        <td>${iD}</td>
+        <td>${title}</td>
+        <td>${annualSalary}</td>
+        <td><button class="deleteEmployee">Delete</button></td>
+    </tr>
+    `);
 
-    $(document).ready(tableSetup);
+    $('#salary-Table tbody').append(emplElement);
+    $('.deleteEmployee').on('click', deleteEmp);
+}
+
+function deleteEmp(event){
+    console.log('in deleteEmp');
+    let removed = $(event.target);
+    let targetRow = removed.closest('tr');
+    targetRow.remove();
+}
+
+$(document).ready(tables);
