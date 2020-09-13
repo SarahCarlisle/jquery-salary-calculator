@@ -6,3 +6,14 @@
     color: lightgray;
     font-size: 15px; 
 }
+
+.submit {
+position: relative;
+padding: 10px 20px 10px 725px
+  }
+  
+#salary-Table {
+margin-top: 5px;
+width: 100%;
+
+}
