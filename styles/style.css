@@ -4,7 +4,7 @@
     background: #394496;
     border-style: solid;
     color: lightgray;
-    font-size: 15px; 
+    font-size: 15px;
 }
 
 .submit {
@@ -14,7 +14,7 @@ padding: 10px 20px 10px 725px
 
 .h2 {
     margin-top: 5px;
-    width: 100%;  
+    width: 100%;
 }
 
 table {
@@ -25,4 +25,12 @@ table {
 
 table, th, td {
     border: 1px solid black;
+}
+
+.over-budget {
+    color: red;
+}
+
+.under-budget {
+    color: green;
 }

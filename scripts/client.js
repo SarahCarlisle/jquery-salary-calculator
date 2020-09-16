@@ -1,3 +1,4 @@
+let totalAnnualSalary = 0;
 //creating table in java
 function tables() {
     const table = $(`
@@ -8,7 +9,6 @@ function tables() {
 <input id="annSal" placeholder="Aunnual Salary" .>
 <br>
 <button id="addInfo2Table">Submit</button>
-
 <h2>Employees</h2>
     <table id="salary-Table">
     <thead>
@@ -52,6 +52,7 @@ function tables() {
     //appending table to DOM and synching button "addinfor2table" to DOM
     $('body').append(table);
     $('#addInfo2Table').on('click', employeeAdded);
+
 }
 // running event to add submitted fields to DOM
 function employeeAdded(event) {
@@ -76,27 +77,32 @@ function employeeAdded(event) {
 
     $('#salary-Table tbody').append(emplElement);
     $('.deleteEmployee').on('click', deleteEmp);
+ 
 }
-
-function deleteEmp(event){
-    console.log('in deleteEmp');
-    let removed = $(event.target);
-    let targetRow = removed.closest('tr');
-    targetRow.remove();
+    function updateSalaryToDOM() {
+        console.log(totalMonthlySalary)
+        const totalMonthlySalary = totalAnnualSalary / 12;
+        if (totalMonthlySalary > 20000) {
+            $("#totalsumvalue").addClass('over-budget');
+        } else {
+            $("#totalsumvalue").addClass('under-budget');
+        }
+        $("#totalsumvaluey").text(totalMonthlySalary.toFixed(2));
+    }
+  
+    function deleteEmp(event) {
+        console.log('in deleteEmp');
+        let removed = $(event.target);
+        let targetRow = removed.closest('tr');
+        targetRow.remove();
+        const salary = removed.data("salary");
+        totalAnnualSalary -= Number(salary);
+        updateSalaryToDOM();
+    
+    
+    totalAnnualSalary += Number(annualSalary);
+    updateSalaryToDOM()
 }
-//// bad attempt at calc sal, had been sucessful would have divided it by 12
-$('salary-Table').change(function(){
-    let totSum = 0;
-    $("td:nth-child(5)").each(function () {
-        let val = $(this).text().replace(" ", "").replace(",-", "");
-        totSum += parseInt(val);
-    });
-    $(".total_sum_value").html('<td colspan="5">' + theTotal + ',- </td>');
-    console.log(totSum);
-});
-
-
-
 
 
 $(document).ready(tables);
